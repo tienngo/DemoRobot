@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite failures="0" skip="0" tests="1" name="Demo Robot" errors="0">
+<testcase classname="Demo Robot" name="Demo testcase for automation framework" time="2">
+</testcase>
+</testsuite>

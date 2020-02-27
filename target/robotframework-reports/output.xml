@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 2.8.1 (Jython 2.5.3 on java1.8.0_241)" generated="20200227 01:46:11.445">
+<suite source="D:\Tien\workspace\DemoRobot\src\main\java\testcase\demo_robot.robot" name="Demo Robot" id="s1">
+<test name="Demo testcase for automation framework" id="s1-t1">
+<kw type="kw" name="customlib.CustomJavaLib.Post Register API">
+<doc></doc>
+<arguments>
+<arg>null</arg>
+</arguments>
+<msg level="INFO" timestamp="20200227 01:46:13.883">Feb 27, 2020 1:46:12 AM org.glassfish.jersey.logging.LoggingInterceptor log
+INFO: 1 * Sending client request on thread MainThread
+1 &gt; POST https://parabank.parasoft.com/parabank/register.htm
+1 &gt; Accept: application/json
+1 &gt; Content-Type: application/json
+null
+
+Feb 27, 2020 1:46:13 AM org.glassfish.jersey.logging.LoggingInterceptor log
+INFO: 1 * Client response received on thread MainThread
+1 &lt; 500
+1 &lt; CF-Cache-Status: DYNAMIC
+1 &lt; CF-RAY: 56b414b22a34c6e8-SGN
+1 &lt; Connection: keep-alive
+1 &lt; Content-Language: en-US
+1 &lt; Content-Type: text/html;charset=ISO-8859-1
+1 &lt; Date: Wed, 26 Feb 2020 18:46:17 GMT
+1 &lt; Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+1 &lt; Server: cloudflare
+1 &lt; Set-Cookie: JSESSIONID=8E80514966075D595453659810DA9277; Path=/parabank; Secure; HttpOnly,__cfduid=d149c1a5d68df93e2b817b9222ef905d21582742776; expires=Fri, 27-Mar-20 18:46:16 GMT; path=/; domain=.parasoft.com; HttpOnly; SameSite=Lax
+1 &lt; Transfer-Encoding: chunked
+
+
+
+
+&lt;!-- &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+ --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"&gt;
+		&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;
+		&lt;title&gt;ParaBank | Error&lt;/title&gt;
+		&lt;link href="/parabank/template.css;jsessionid=8E80514966075D595453659810DA9277" rel="stylesheet"
+			type="text/css" /&gt;
+		&lt;link href="/parabank/style.css;jsessionid=8E80514966075D595453659810DA9277" rel="stylesheet"
+			type="text/css" /&gt;
+		&lt;script src="/parabank/webjars/angularjs/1.6.9/angular.min.js;jsessionid=8E80514966075D595453659810DA9277"&gt;&lt;/script&gt;
+	&lt;/head&gt;
+
+	&lt;body
+		
+	    onload="document.login.username.focus(</msg>
+<status endtime="20200227 01:46:13.955" starttime="20200227 01:46:11.669" status="PASS"></status>
+</kw>
+<doc></doc>
+<tags>
+</tags>
+<status critical="yes" endtime="20200227 01:46:13.960" starttime="20200227 01:46:11.666" status="PASS"></status>
+</test>
+<doc></doc>
+<metadata>
+</metadata>
+<status endtime="20200227 01:46:13.966" starttime="20200227 01:46:11.447" status="PASS"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" name="Demo Robot" id="s1">Demo Robot</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -49,8 +49,6 @@ public class RESTRequest {
 		client = JerseyClientBuilder.newBuilder().build();
 		client.register(new LoggingFeature(LogManager.getLogManager().getLogger(RESTRequest.class.getName()), Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY,null));
 		client.property(ClientProperties.FOLLOW_REDIRECTS, Boolean.FALSE);
-		client.register(JacksonFeature.class);
-		client.register(MultiPartFeature.class);
 	}
 	
 	public void buildingRequest() {
@@ -81,23 +79,20 @@ public class RESTRequest {
 	public Response get() {
 		logRequest(this.request);
 		Response response = this.request.get();
-		Response returnResponse = response;
 //		System.err.print("\n" + response.readEntity(String.class) + "\n");
-		return returnResponse;
+		return response;
 	}
 	
 	public Response put(Entity<?> entity) {
 		logRequest(this.request);
 		Response response = this.request.put(entity);
-		Response returnResponse = response;
 //		System.err.print("\n" + response.readEntity(String.class) + "\n");
-		return returnResponse;		
+		return response;		
 	}
 	
 	public Response post(Entity<?> entity) {
 		logRequest(this.request);
 		Response response = this.request.post(entity);
-		Response returnResponse = response;
 //		System.err.print("\n" + returnResponse.readEntity(String.class) + "\n");
 		return response;		
 	}

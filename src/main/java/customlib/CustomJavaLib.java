@@ -1,11 +1,7 @@
 package customlib;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Form;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -69,7 +65,7 @@ public class CustomJavaLib {
 		return bankAccountInfo;
 	}
 	
-	public void transferFunds(Response sessionCookie, BankAccount bankAccountSource, BankAccount bankAccountTarget, Double amount) {
+	public String transferFunds(Response sessionCookie, BankAccount bankAccountSource, BankAccount bankAccountTarget, Double amount) {
 		RESTRequest transferFundsRequest = new RESTRequest("parabank/services_proxy/bank/transfer?fromAccountId=" + bankAccountSource.getId() + "&toAccountId=" + bankAccountTarget.getId() + "&amount=" + amount);
 		transferFundsRequest.configHeader("Cookie", sessionCookie.getHeaderString("Set-Cookie").toString());
 		Response response = transferFundsRequest.post(Entity.entity("null", MediaType.APPLICATION_JSON));
@@ -84,8 +80,18 @@ public class CustomJavaLib {
 		System.err.print("- customerId: " + bankAccountTarget.getCustomerId() + "\n");
 		System.err.print("- balance: " + bankAccountTarget.getBalance() + "\n");
 		System.err.print("- type: " + bankAccountTarget.getType() + "\n");
-		
-		System.err.print("Transfer Message: " + response.readEntity(String.class) + "\n");
+		String transferMsg = response.readEntity(String.class);
+		System.err.print("Transfer Message: " + transferMsg + "\n");
+		return transferMsg;
+	}
+	
+	public void transferMessageShouldBeCorrect (String transferMsg, BankAccount bankAccountSource, BankAccount bankAccountTarget, Double amount) {
+		String expectedTransferMsg = "Successfully transferred $" + amount + " from account #" + bankAccountSource.getId() + " to account #" + bankAccountTarget.getId();
+		if(!transferMsg.equals(expectedTransferMsg)) {
+			System.err.print("Transfer message is not correct.\n- expect:{" + expectedTransferMsg + "};\n- actual:{" + transferMsg + "}");
+			throw new AssertionError("Transfer message is not correct");  
+		}
+		System.err.print("Transfer message is successful and correct");
 	}
 	
 	

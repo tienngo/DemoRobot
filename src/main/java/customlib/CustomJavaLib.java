@@ -14,6 +14,7 @@ import pom.apiobject.BankAccount;
 
 public class CustomJavaLib {
 
+	// UI test
 	private WebDriver driver;
 	
 	public void initBrowser() {
@@ -30,6 +31,9 @@ public class CustomJavaLib {
 	public void closeBrowserByJavaLib() {
 		driver.close();
 	}
+	
+	
+	/** API Test Keyword */
 	
 	public Response loginAs(String userName, String password) {
 		RESTRequest loginRequest = new RESTRequest("parabank/login.htm");
@@ -75,6 +79,7 @@ public class CustomJavaLib {
 		RESTRequest transferFundsRequest = new RESTRequest("parabank/services_proxy/bank/transfer?fromAccountId=" + bankAccountSource.getId() + "&toAccountId=" + bankAccountTarget.getId() + "&amount=" + amount);
 		transferFundsRequest.configHeader("Cookie", sessionCookie.getHeaderString("Set-Cookie").toString());
 		Response response = transferFundsRequest.post(Entity.entity("null", MediaType.APPLICATION_JSON));
+		transferFundsRequest.logResponse(transferMsg);
 		System.err.print("Bank Account Source:\n");
 		System.err.print("- Id: " + bankAccountSource.getId() + "\n");
 		System.err.print("- customerId: " + bankAccountSource.getCustomerId() + "\n");
@@ -88,7 +93,6 @@ public class CustomJavaLib {
 		System.err.print("- type: " + bankAccountTarget.getType() + "\n");
 		String transferMsg = response.readEntity(String.class);
 		System.err.print("Transfer Message: " + transferMsg + "\n");
-		transferFundsRequest.logResponse(transferMsg);
 		return transferMsg;
 	}
 	

@@ -47,7 +47,6 @@ public class RESTRequest {
 	
 	private void initBuilder() {
 		client = JerseyClientBuilder.newBuilder().build();
-		client.register(new LoggingFeature(LogManager.getLogManager().getLogger(RESTRequest.class.getName()), Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY,null));
 		client.property(ClientProperties.FOLLOW_REDIRECTS, Boolean.FALSE);
 	}
 	
@@ -77,35 +76,45 @@ public class RESTRequest {
 	}
 	
 	public Response get() {
-		logRequest(this.request);
+		logMethod("GET");
 		Response response = this.request.get();
-//		System.err.print("\n" + response.readEntity(String.class) + "\n");
 		return response;
 	}
 	
 	public Response put(Entity<?> entity) {
-		logRequest(this.request);
+		logMethod("PUT");
 		Response response = this.request.put(entity);
-//		System.err.print("\n" + response.readEntity(String.class) + "\n");
 		return response;		
 	}
 	
 	public Response post(Entity<?> entity) {
-		logRequest(this.request);
+		logMethod("POST");
 		Response response = this.request.post(entity);
-//		System.err.print("\n" + returnResponse.readEntity(String.class) + "\n");
 		return response;		
 	}
 	
-	private void logRequest(Builder request) {
-//		System.err.print("test");
-//		try {
-//			System.err.print(new ObjectMapper().writeValueAsString());
-//		} catch (JsonProcessingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//
-//			System.err.print(e.getMessage());
-//		}
+	private void logMethod(String method) {
+		System.err.print(method.toUpperCase() + " " + this.apiUrl + "\n");
+	}
+	
+	public void logRequest(String params) {
+		if(params != null) {
+			System.err.print("request: " + params + "\n");
+		}
+	}
+	
+	public void logResponse(String params) {
+		if(params != null) {
+			System.err.print("response: " + params + "\n");
+		}
+	}
+	
+	public String logObjectAsString(Object object) {
+		try {
+			return new ObjectMapper().writeValueAsString(object);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			return "";
+		}
 	}
 }

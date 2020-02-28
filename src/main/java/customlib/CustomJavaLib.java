@@ -36,7 +36,9 @@ public class CustomJavaLib {
 		Form form = new Form();
 		form.param("username", userName);
 		form.param("password", password);
-		return loginRequest.post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
+		Response response = loginRequest.post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
+		loginRequest.logRequest("{username: " + userName + ", password: " + password +"}");
+		return response;
 	}
 	
 	public BankAccount getDetailOfBankAccount(Response sessionCookie, String bankAccount) {
@@ -44,6 +46,7 @@ public class CustomJavaLib {
 		getAllAccountsRequest.configHeader("Cookie", sessionCookie.getHeaderString("Set-Cookie").toString());
 		Response response = getAllAccountsRequest.get();
 		BankAccount bankAccountInfo = response.readEntity(BankAccount.class);
+		getAllAccountsRequest.logResponse(getAllAccountsRequest.logObjectAsString(bankAccountInfo));
 		System.err.print("Bank Account Source:\n");
 		System.err.print("- Id: " + bankAccountInfo.getId() + "\n");
 		System.err.print("- customerId: " + bankAccountInfo.getCustomerId() + "\n");
@@ -56,7 +59,10 @@ public class CustomJavaLib {
 		RESTRequest createNewBankAccountRequest = new RESTRequest("parabank/services_proxy/bank/createAccount?customerId=" + bankAccountSource.getCustomerId() + "&newAccountType=0&fromAccountId=" + bankAccountSource.getId());
 		createNewBankAccountRequest.configHeader("Cookie", sessionCookie.getHeaderString("Set-Cookie").toString());
 		Response response = createNewBankAccountRequest.post(Entity.entity("null", MediaType.APPLICATION_JSON));
+		
 		BankAccount bankAccountInfo = response.readEntity(BankAccount.class);
+
+		createNewBankAccountRequest.logResponse(createNewBankAccountRequest.logObjectAsString(bankAccountInfo));
 		System.err.print("Bank Account Target:\n");
 		System.err.print("- Id: " + bankAccountInfo.getId() + "\n");
 		System.err.print("- customerId: " + bankAccountInfo.getCustomerId() + "\n");
@@ -82,6 +88,7 @@ public class CustomJavaLib {
 		System.err.print("- type: " + bankAccountTarget.getType() + "\n");
 		String transferMsg = response.readEntity(String.class);
 		System.err.print("Transfer Message: " + transferMsg + "\n");
+		transferFundsRequest.logResponse(transferMsg);
 		return transferMsg;
 	}
 	
